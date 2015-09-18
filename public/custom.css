@@ -7,20 +7,32 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
+  margin-bottom: 25px;
 }
 
 h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
+  font-size: 1.8em;
+  letter-spacing: -2px;
+  margin-bottom: 25px;
   color: #d3d3d3;
 }
 
-p {
-  font-size: 1.1em;
+p, table > caption {
+  font-size: 1.2em;
   line-height: 1.7em;
+  color: #585858;
+}
+
+.jumbotron {
+  padding: 0 30px !important;
+}
+
+thead {
+  background-color: #C0C0C0;
+}
+
+.table-fix {
+       max-width: none;
+       word-wrap: break-word;
+       table-layout: fixed;
 }

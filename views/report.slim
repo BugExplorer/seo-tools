@@ -1,24 +1,44 @@
-doctype html
-html
-  head
-    title "SEO"
-    link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet' type='text/css'
-    link href='custom.css' rel='stylesheet' type='text/css'
-  body
-    div class="container"
-      h2 
-        ' Report for 
-        a href="http://#{url}" =url
-      div class="row"
-        div class="col-md-3 col-lg-3"
+h1
+  ' Report for
+  a href="http://#{url}" =url
+div class="alert alert-success"
+  ' Date:
+  strong = headers["Date"]
 
-        div class="col-md-6 col-lg-6"
-          table
-            - for i in links
-              tr
-                td.name = i
-                td.url = i[:href]            
+div class="alert alert-info"
+  ' Ip:
+  strong = ip
 
-        div class="col-md-3 col-lg-3"
+div class="jumbotron"
+    div class="row"
+      table class="table table-hover table-bordered"
+        caption Response headers
+        thead
+          tr
+            th Name
+            th Value
+        tbody
+          - headers.each do |key, value|
+            tr
+              td.name class="col-md-4" = key
+              td.value class="col-md-8" = value
 
-      
+
+div class="jumbotron"
+    div class="table-responsive"
+      table class="table table-hover table-bordered table-fix"
+        caption Page links
+        thead
+          tr
+            th Name
+            th Url
+            th Rel
+            th Target
+        tbody
+          - for i in links
+            tr
+              td.name = i.content
+              td.url
+                a href="#{i[:href]}" = i[:href]
+              td.rel = i['rel']
+              td.target = i[:target]
