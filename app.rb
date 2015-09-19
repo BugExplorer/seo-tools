@@ -1,6 +1,6 @@
 class App < Sinatra::Base
   set :public_folder, 'public'
-  set :show_exceptions, :after_handler
+  set :show_exceptions, false
 
   before do
     FileUtils.mkdir_p("./public/reports/") unless File
@@ -18,7 +18,12 @@ class App < Sinatra::Base
     redirect "/"
   end
 
+  not_found do
+    status 404
+    slim :error
+  end
+
   error do
-    'Something get wrong'
+    slim :error
   end
 end

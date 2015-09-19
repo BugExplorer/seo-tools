@@ -1,7 +1,7 @@
 require 'reports_handler'
 
 RSpec.describe ReportsHandler do
-  context "with right path" do
+  context "with valid path" do
     it "returns an array of hashes" do
       expect(ReportsHandler.new('./spec/tmp/').create).to eq (
          [{:url  => "test.com",

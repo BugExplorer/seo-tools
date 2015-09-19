@@ -30,7 +30,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    WebMock.disable_net_connect!
+    WebMock.disable_net_connect!(:allow => "example.wrong")
     stub_request(:any, "http://example.org").to_return(:body => "abc",
                  :status => 200, :headers => { 'Content-Length' => "3" })
   end

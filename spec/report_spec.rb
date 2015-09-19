@@ -10,7 +10,6 @@ RSpec.describe Report do
   context "with right url" do
     it "parses page title" do
       uri = URI("http://example.org")
-
       report = Report.new(uri.to_s)
       report.generate
       expect(report.headers).to include("Content-Length" => "3")
