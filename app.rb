@@ -2,13 +2,19 @@ class App < Sinatra::Base
   set :public_folder, 'public'
   set :show_exceptions, :after_handler
 
+  before do
+    FileUtils.mkdir_p("./public/reports/") unless File
+      .directory?("./public/reports/")
+  end
+
   get "/" do
-    @reports = ReportsHandler.new('./public/reports/').generate
+    @reports = ReportsHandler.new('./public/reports/').create
     slim :index
   end
 
   post "/report" do
-    @report = Report.new(params[:url]).generate
+    @report = Report.new(params[:url])
+    @report.generate
     redirect "/"
   end
 

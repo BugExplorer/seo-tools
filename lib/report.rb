@@ -1,13 +1,14 @@
 class Report
   attr_reader :url, :title, :links, :headers, :ip
   def initialize(url)
-    @url = cleanUrl(url)
+    if url
+      @url = cleanUrl(url)
+    else
+      raise StandardError, '@url is empty'
+    end
   end
 
   def generate()
-    # c = Curl::Easy.perform("http://www.google.co.uk")
-    # puts c.body_str
-
     # Get response using Curl
     @response = Curl::Easy.new("http://" + @url)  do |curl|
       curl.follow_location = true
@@ -31,7 +32,6 @@ class Report
     # Links on the site can be without 'http://site_url.com' part
     # Or without rel and target
     @links.each do |link|
-
       link[:href] = "http://" + @url.to_s + link[:href].to_s unless
         (link[:href] =~ /http(s*):\/\/(www\.)*/) ||
         (link[:href] =~ /^mailto:/)

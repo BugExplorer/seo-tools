@@ -14,7 +14,7 @@ div class="row"
 
 br
 div class="row"
-  - unless @reports.empty?
+  - unless @reports.nil?
     div class="jumbotron"
         div class="row"
           table class="table table-hover table-bordered"
@@ -27,7 +27,7 @@ div class="row"
             tbody
               - @reports.each do |report|
                 tr
-                  td.url class="col-md-4" = report[0]
-                  td.time class="col-md-4" = report[1]
+                  td.url class="col-md-4" = report[:url]
+                  td.time class="col-md-4" = report[:time]
                   td.actions class="col-md-4"
-                    a href="reports/#{report[2]}" View
+                    a href="reports/#{report[:path]}" View

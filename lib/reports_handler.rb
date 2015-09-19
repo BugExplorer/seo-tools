@@ -1,25 +1,27 @@
 class ReportsHandler
   def initialize(path)
-    @files = Dir.entries(path).delete_if { |x| !(x =~ /html/) }
-    puts @files
+    if path
+      @files = Dir.entries(path).delete_if { |x| !(x =~ /html/) }
+    else
+      raise StandardError, 'there is no path'
+    end
   end
 
-  def generate()
-    _data = []
+  def create()
+    if @files.any?
+      _files = []
 
-    unless @files.nil?
       @files.each do |file|
-        _data << [
+        _files << {
           # Site url
-          file.gsub(/_.+/, ''),
-          # Gets formatted creation time
-          Time.at(file.gsub(/.+_/, '').to_i).strftime("%e %B %Y"),
+          url: file.gsub(/_.+/, ''),
+          # Creation time
+          time: Time.at(file.gsub(/.+_/, '').to_i).strftime("%e %B %Y"),
           # File path
-          file
-        ]
+          path: file
+        }
       end
+      return _files.sort_by { |hsh| hsh[:url] }
     end
-
-    _data
   end
 end
