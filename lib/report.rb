@@ -23,7 +23,11 @@ class Report
     @headers = Hash[@headers.flat_map{ |s| s.scan(/^(\S+): (.+)/) }]
 
     # Generate doc for parsing
-    _doc = Nokogiri::HTML(@response.body_str)
+    _body = @response.body_str
+    unless _body.force_encoding("UTF-8").valid_encoding?
+       _body.force_encoding("cp1251")
+    end 
+    _doc = Nokogiri::HTML(_body)
 
     # Parse all the things
     @title = _doc.css('title').text
