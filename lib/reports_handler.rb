@@ -16,12 +16,12 @@ class ReportsHandler
           # Site url
           url: file.gsub(/_.+/, ''),
           # Creation time
-          time: Time.at(file.gsub(/.+_/, '').to_i).strftime("%e %B %Y"),
+          time: Time.at(file.gsub(/.+_/, '').to_i).strftime("%e %B %Y %k:%M"),
           # File path
           path: file
         }
       end
-      return _files.sort_by { |hsh| hsh[:url] }
+      return _files.sort_by { |hsh| hsh[:time] }.reverse
     end
   end
 end
