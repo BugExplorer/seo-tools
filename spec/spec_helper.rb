@@ -2,10 +2,8 @@ ENV['RACK_ENV'] = 'test'
 
 require 'rubygems'
 require 'bundler'
-
 Bundler.require(:default)                   # load all the default gems
 Bundler.require(Sinatra::Base.environment)  # load all the environment specific gems
-
 require 'webmock/rspec'
 
 require_relative "../app.rb"
@@ -26,7 +24,7 @@ RSpec.configure do |config|
     # Creates empty dir for the ReportsHandler test
     FileUtils.mkdir_p("./spec/tmp/tmp") unless File.directory?("./spec/tmp/tmp")
     # File for ReportsHandler
-    File.open("./spec/tmp/test.com_1442652783.html", 'w')
+    File.open("./spec/tmp/test.com_1442683187.html", 'w')
   end
 
   config.before(:each) do

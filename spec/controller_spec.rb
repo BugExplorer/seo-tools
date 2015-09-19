@@ -28,8 +28,8 @@ RSpec.describe App do
       end
     end
 
-    context "with invalid request" do
-      it do
+    context "with invalid hostname" do
+      it "raises error" do
         expect {
           post "/report", :url => "http://example.wrong"
         }.to raise_error Curl::Err::HostResolutionError

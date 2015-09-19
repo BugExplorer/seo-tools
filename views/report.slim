@@ -40,5 +40,5 @@ div class="jumbotron"
               td.name = i.content
               td.url
                 a href="#{i[:href]}" = i[:href]
-              td.rel = i['rel']
-              td.target = i[:target]
+              td.rel = i['rel'] || 'None'
+              td.target = i[:target] || '_self'
