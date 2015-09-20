@@ -19,14 +19,6 @@ RSpec.configure do |config|
 
   config.mock_with :rspec
 
-  config.before(:all) do
-    FileUtils.mkdir_p("./spec/tmp/") unless File.directory?("./spec/tmp/")
-    # Creates empty dir for the ReportsHandler test
-    FileUtils.mkdir_p("./spec/tmp/tmp") unless File.directory?("./spec/tmp/tmp")
-    # File for ReportsHandler
-    File.open("./spec/tmp/test.com_1442683187.html", 'w')
-  end
-
   config.before(:each) do
     WebMock.disable_net_connect!(:allow => "example.wrong")
     stub_request(:any, "http://example.org").to_return(:body => "abc",
@@ -35,8 +27,7 @@ RSpec.configure do |config|
 
   config.after(:all) do
     # Remove temporary files
-    FileUtils.rm_rf(Dir["./public/reports/example*"])
-    FileUtils.rm_rf(Dir["./spec/tmp/"])
+    FileUtils.rm_r Dir.glob('./public/reports/example.org*')  
     WebMock.allow_net_connect!
   end
 end
