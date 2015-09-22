@@ -1,33 +1,29 @@
-ENV['RACK_ENV'] = 'test'
+# Configure Rack Envinronment
+ENV['RACK_ENV'] = "test"
 
-require 'rubygems'
-require 'bundler'
-Bundler.require(:default)                   # load all the default gems
-Bundler.require(Sinatra::Base.environment)  # load all the environment specific gems
+require File.expand_path('../../config/environment',  __FILE__)
+
 require 'webmock/rspec'
 
-require_relative "../app.rb"
-require_relative "../lib/report.rb"
-require_relative "../lib/reports_handler.rb"
-
 RSpec.configure do |config|
+  require 'rack/test'
   include Rack::Test::Methods
+  WebMock.disable_net_connect!
 
   def app
-    App.new
+    SEOTool::Application.new
   end
 
+  # == Mock Framework
   config.mock_with :rspec
 
   config.before(:each) do
-    WebMock.disable_net_connect!(:allow => "example.wrong")
-    stub_request(:any, "http://example.org").to_return(:body => "abc",
+    stub_request(:any, "http://example.spec").to_return(:body => "abc",
                  :status => 200, :headers => { 'Content-Length' => "3" })
   end
 
   config.after(:all) do
     # Remove temporary files
-    FileUtils.rm_r Dir.glob('./public/reports/example.org*')  
-    WebMock.allow_net_connect!
+    FileUtils.rm_r Dir.glob('./public/reports/example.spec*')
   end
 end

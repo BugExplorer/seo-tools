@@ -1,13 +1,13 @@
 h1
   ' Report for
-  a href="http://#{url}" =url
+  a href="http://#{url}" =@url
 div class="alert alert-success"
   ' Date:
-  strong = headers["Date"]
+  strong = @headers["Date"]
 
 div class="alert alert-info"
   ' Ip:
-  strong = ip
+  strong = @ip
 
 div class="jumbotron"
     div class="row"
@@ -18,7 +18,7 @@ div class="jumbotron"
             th Name
             th Value
         tbody
-          - headers.each do |key, value|
+          - @headers.each do |key, value|
             tr
               td.name class="col-md-4" = key
               td.value class="col-md-8" = value
@@ -35,10 +35,11 @@ div class="jumbotron"
             th Rel
             th Target
         tbody
-          - for i in links
-            tr
-              td.name = i.content
-              td.url
-                a href="#{i[:href]}" = i[:href]
-              td.rel = i['rel'] || 'None'
-              td.target = i[:target] || '_self'
+          - if @links.any?
+            - @links.each do |i|
+              tr
+                td.name = i.content
+                td.url
+                  a href="#{i.href}" = i.href
+                td.rel = i.rel
+                td.target = i.target

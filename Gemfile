@@ -5,6 +5,7 @@ gem 'nokogiri', '~> 1.6.6.2'
 gem 'curb', '~> 0.8.8'
 gem 'slim', '~> 3.0.6'
 gem 'rack', '~> 1.6.4'
+gem 'pg', '~> 0.18.3'
 
 group :test do
   gem 'rspec', '~> 3.3.0'

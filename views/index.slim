@@ -1,8 +1,8 @@
 h1 class="text-center" SEO Link Reporter
 div class="row"
-  div class="col-md-3 col-lg-3"
+  div class="col-md-3"
 
-  div class="col-md-6 col-lg-6"
+  div class="col-md-6"
     form action="/report" method="post" class="form-horizontal"
       div class="input-group"
           input { type="text" name="url" class="form-control" required
@@ -10,11 +10,11 @@ div class="row"
           span class="input-group-btn"
             input type="submit" class="btn btn-primary"
 
-  div class="col-md-3 col-lg-3"
+  div class="col-md-3"
 
 br
 div class="row"
-  - unless @reports.nil?
+  - unless @reports.nil? || @reports.empty?
     div class="jumbotron"
         div class="row"
           table class="table table-hover table-bordered"
@@ -25,9 +25,10 @@ div class="row"
                 th Created at
                 th Actions
             tbody
-              - @reports.each do |report|
-                tr
-                  td.url class="col-md-4" = report[:url]
-                  td.time class="col-md-4" = report[:time]
-                  td.actions class="col-md-4"
-                    a href="reports/#{report[:path]}" View
+                - @reports.each do |report|
+                  tr
+                    td.url class="col-md-4" = report[:url]
+                    td.time class="col-md-4"
+                      = report[:time]
+                    td.actions class="col-md-4"
+                       a href="/report/#{report[:guid]}" View

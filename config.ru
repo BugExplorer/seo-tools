@@ -1,12 +1,10 @@
-ENV['RACK_ENV'] ||= 'development'
-
 require 'rubygems'
 require 'bundler'
 
 Bundler.require
+require './lib/seo_tool'
+require './lib/application/application'
 
-require_relative 'lib/report'
-require_relative 'lib/reports_handler'
-require_relative 'app'
+require ::File.expand_path('../config/environment',  __FILE__)
 
-run App
+run SEOTool::Application
