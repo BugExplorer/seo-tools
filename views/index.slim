@@ -1,34 +1,53 @@
-h1 class="text-center" SEO Link Reporter
-div class="row"
-  div class="col-md-3"
+nav class="navbar navbar-default navbar-fixed-top"
+      div class="container"
+        div class="navbar-header"
+          a class="navbar-brand navbar-link" href="/" SEO Link Reporter
+        div id="navbar" class="navbar-collapse collapse"
+          ul class="nav navbar-nav"
+            - if current_user
+              li
+                img class="gravatar" class="img-small" src="#{gravatar_for(current_user)}"
+              li
+                a class="navbar-small" href="#" Hello, #{current_user.username}
+            - else
+              li
+                a class="navbar-small" href="/login" Login
+          - if current_user
+            ul class="nav navbar-nav navbar-right"
+              li
+                form class="form-signin" action="/logout" method="post"
+                  input type="hidden" name="_method" value="delete"
+                  input type="submit" value="Logout" class="btn btn-lg btn-default"
 
-  div class="col-md-6"
-    form action="/report" method="post" class="form-horizontal"
-      div class="input-group"
-          input { type="text" name="url" class="form-control" required
-            pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$" }
-          span class="input-group-btn"
-            input type="submit" class="btn btn-primary"
+div class="container down"
+  div class="row"
+    div class="col-md-2"
 
-  div class="col-md-3"
+    div class="col-md-8"
+      form class="form-signin" action="/report" method="post"
+        input { type="text" name="url" class="form-control" placeholder="URL" required
+        pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$" }
+        input type="submit" class="btn btn-lg btn-default btn-block"
 
-br
-div class="row"
-  - unless @reports.nil? || @reports.empty?
-    div class="jumbotron"
-        div class="row"
-          table class="table table-hover table-bordered"
-            caption Reports
-            thead
-              tr
-                th Site url
-                th Created at
-                th Actions
-            tbody
-                - @reports.each do |report|
-                  tr
-                    td.url class="col-md-4" = report[:url]
-                    td.time class="col-md-4"
-                      = report[:time]
-                    td.actions class="col-md-4"
-                       a href="/report/#{report[:guid]}" View
+    div class="col-md-2"
+
+  br
+  div class="row"
+    - unless @reports.nil? || @reports.empty?
+      div class="jumbotron"
+          div class="row"
+            table class="table table-hover table-bordered"
+              caption Reports
+              thead
+                tr
+                  th Site url
+                  th Created at
+                  th Actions
+              tbody
+                  - @reports.each do |report|
+                    tr
+                      td.url class="col-md-4" = report[:url]
+                      td.time class="col-md-4"
+                        = report[:time]
+                      td.actions class="col-md-4"
+                         a href="/report/#{report[:guid]}" View

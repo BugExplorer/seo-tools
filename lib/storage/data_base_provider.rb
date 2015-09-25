@@ -1,6 +1,6 @@
 require 'pg'
-require_relative '../application/link'
-require_relative '../application/report'
+require_relative '../application/classes/link'
+require_relative '../application/classes/report'
 
 module Storage
   class DataBaseProvider < StorageProvider

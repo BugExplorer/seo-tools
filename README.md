@@ -8,10 +8,13 @@
 #### If curb installation fails:
 * sudo apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev
 
+#### Default user: admin, admin
 
 #### Install PostgreSQL(Debian/Ubuntu/...):
 * sudo apt-get install postgresql-common
-* sudo apt-get install postgresql-9.3 libpq-dev
+
+* sudo apt-get install postgresql-9.3 postgresql-server-dev-9.3 libpq-dev
+
 * Change settings in data_base_provider.rb
 
 #### If you are going to use clean SQL storage (db in CONFIG file):
