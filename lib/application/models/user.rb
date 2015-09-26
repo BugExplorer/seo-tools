@@ -1,6 +1,9 @@
 module SEOTool
   class User
     include DataMapper::Resource
+
+    # Here I'm using non encrypted password
+
     property :id,       Serial
     property :username, String, :required => true
     property :email,    String
@@ -12,7 +15,9 @@ module SEOTool
   if User.count == 0
     @user = User.create(username: "admin",
                         email: "example@example.com",
-                        password: "admin")
+                        password: "administrator")
     @user.save
   end
+
+  DataMapper.auto_upgrade!
 end

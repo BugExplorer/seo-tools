@@ -1,4 +1,3 @@
-require  'dm-migrations'
 module Storage
   class Report
     include DataMapper::Resource
@@ -34,7 +33,7 @@ module Storage
     belongs_to :report
   end
 
-  DataMapper.finalize
+  DataMapper.finalize.auto_upgrade!
 
   class ORMProvider < StorageProvider
     def get_all_reports

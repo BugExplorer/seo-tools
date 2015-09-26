@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe Storage::FilesProvider do
+RSpec.describe 'FilesProvider' do
   before do
     @files_provider = Storage::FilesProvider.new
   end

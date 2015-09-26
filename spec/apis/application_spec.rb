@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe SEOTool::Application do
+RSpec.describe 'Application' do
   describe "GET Index" do
     it "includes 'SEO Link Reporter'" do
       get '/'
