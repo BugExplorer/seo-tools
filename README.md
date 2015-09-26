@@ -3,7 +3,8 @@
 * rackup
 
  Change storage type by changing ENV['STORAGE'] in the "config/enviroment.rb"
- You can choose "db" or "file"
+
+ You can choose "orm", db" or "file"
 
 #### If curb installation fails:
 * sudo apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev
@@ -23,6 +24,8 @@
 * Do this:
 
     * CREATE DATABASE project;
+
+    * CREATE DATABASE test; (If you are going to run tests)
 
     * CREATE TABLE reports (id serial PRIMARY KEY, url varchar(255), ip cidr, time bigint, links_count int);
 

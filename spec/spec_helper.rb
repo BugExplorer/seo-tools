@@ -3,11 +3,12 @@ ENV['RACK_ENV'] = "test"
 
 require File.expand_path('../../config/environment',  __FILE__)
 
-require 'webmock/rspec'
 
 RSpec.configure do |config|
   require 'rack/test'
   include Rack::Test::Methods
+
+  require 'webmock/rspec'
   WebMock.disable_net_connect!
 
   def app
@@ -17,6 +18,12 @@ RSpec.configure do |config|
   # == Mock Framework
   config.mock_with :rspec
 
+  require 'database_cleaner'
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+  end
+
   config.before(:each) do
     stub_request(:any, "http://example.spec").to_return(:body => "abc",
                  :status => 200, :headers => { 'Content-Length' => "3" })
@@ -25,5 +32,6 @@ RSpec.configure do |config|
   config.after(:all) do
     # Remove temporary files
     FileUtils.rm_r Dir.glob('./public/reports/example.spec*')
+    DatabaseCleaner.clean
   end
 end

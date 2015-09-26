@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe SEOTool::ReportLink do
+RSpec.describe 'ReportLink' do
   context 'with empty rel' do
     _link = SEOTool::ReportLink.new('test.com', 'test', '', '_blank')
     it do
