@@ -28,7 +28,7 @@ RSpec.describe Storage::FilesProvider do
       _ip  = '127.0.0.1'
       _time = 1443198681
       _links = []
-      _links << ::SEOTool::Link.new('test.com', 'test', '', '_blank')
+      _links << ::SEOTool::ReportLink.new('test.com', 'test', '', '_blank')
       _headers = {"Date" => "Today", "Site-Content" => "Text"}
 
       _report = ::SEOTool::Report.new(url: _url,

@@ -2,8 +2,8 @@ module Storage
   class StorageProvider
 
     def get_all_reports; end
-    def save_report; end
-    def select_report; end
+    def save_report(report); end
+    def select_report(id); end
 
     def render_view(report)
       # Create new template object with the layout

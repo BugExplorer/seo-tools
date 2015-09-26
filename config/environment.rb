@@ -5,7 +5,7 @@ require File.expand_path('../boot', __FILE__)
 ENV['RACK_ENV'] ||= 'development'
 ENV['TMPDIR'] ||= File.expand_path('../../tmp', __FILE__)
 
-ENV['STORAGE'] = 'file' # 'db', 'orm' or 'file'
+ENV['STORAGE'] = 'orm' # 'db', 'orm' or 'file'
 
 ENV['STORAGE'] = 'file' if ENV['RACK_ENV'] == 'test'
 

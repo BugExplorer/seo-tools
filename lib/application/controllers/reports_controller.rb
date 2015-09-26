@@ -8,6 +8,8 @@ module SEOTool
           Storage::DataBaseProvider.new
         elsif SEOTool.config == "file"
           Storage::FilesProvider.new
+        else
+          Storage::ORMProvider.new
         end
       @links = []
     end
@@ -60,10 +62,10 @@ module SEOTool
             link[:href] = 'http://' + @url.to_s + link[:href].to_s
           end
           if SEOTool.config == "file"
-            @links << Link.new(link[:href],
-                               link.content,
-                               link[:rel],
-                               link[:target])
+            @links << ReportLink.new(link[:href],
+                                     link.content,
+                                     link[:rel],
+                                     link[:target])
           else
             # In DataBase we don't store Link class objects
             @links << [link[:href],

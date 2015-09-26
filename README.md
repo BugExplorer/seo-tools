@@ -15,7 +15,7 @@
 
 * sudo apt-get install postgresql-9.3 postgresql-server-dev-9.3 libpq-dev
 
-* Change settings in data_base_provider.rb
+* Configure db in /lib/seo_tool.rb ('postgres://sinatra:sinatra@localhost/project')
 
 #### If you are going to use clean SQL storage (db in CONFIG file):
 * Change settings in /lib/storage/data_base_provider.rb

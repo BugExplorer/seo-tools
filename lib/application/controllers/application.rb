@@ -10,7 +10,6 @@ module SEOTool
       if user.nil?
         throw(:warden, message: "The username you entered does not exist.")
       elsif user.password == params['user']['password']
-        puts "ok!"
         success!(user)
       else
         throw(:warden, message: "The username and password combination ")
@@ -31,7 +30,7 @@ module SEOTool
 
       config.scope_defaults :default,
         strategies: [:password],
-        action: 'login/unauthenticated'
+        action: 'unauthenticated'
       config.failure_app = self
     end
 
@@ -71,6 +70,10 @@ module SEOTool
       env['warden'].raw_session.inspect
       env['warden'].logout
       redirect '/'
+    end
+
+    post "/unauthenticated" do
+      redirect "/login"
     end
 
     helpers do

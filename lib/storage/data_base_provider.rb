@@ -1,5 +1,5 @@
 require 'pg'
-require_relative '../application/classes/link'
+require_relative '../application/classes/report_link'
 require_relative '../application/classes/report'
 
 module Storage
@@ -50,16 +50,13 @@ module Storage
                     VALUES ('#{key}', '#{value}', #{_id})")
       end
 
-      if _links.size > 0
-        _links.size.times do |i|
-          @conn.exec("INSERT INTO links (href, content, rel, target, report_id)
-                      VALUES ('#{_links[i][0]}', '#{_links[i][1]}',
-                      '#{_links[i][2]}', '#{_links[i][3]}', #{_id})")
-        end
+      _links.each do |_link|
+        @conn.exec("INSERT INTO links (href, content, rel, target, report_id)
+                    VALUES ('#{_link[0]}', '#{_link[1]}',
+                    '#{_link[2]}', '#{_link[3]}', #{_id})")
       end
     end
 
-    # Strange
     def select_report(id)
       _report = @conn.exec("SELECT * FROM reports WHERE id = #{id}")
       _url     = _report[0]['url']
@@ -72,7 +69,7 @@ module Storage
       _headers_report = @conn.exec "SELECT * FROM headers WHERE report_id = #{id}"
       _headers = {}
 
-      # Create headers hash from db data
+      # Create headers hash from the db data
       for row in _headers_report do
         _headers[row['name']] = row['content']
       end
@@ -82,10 +79,10 @@ module Storage
         _links_arr = @conn.exec("SELECT href, content, rel, target
                                  FROM links WHERE report_id = #{id}")
         _links_count.times do |i|
-          _links << ::SEOTool::Link.new(_links_arr[i]['href'],
-                                        _links_arr[i]['content'],
-                                        _links_arr[i]['rel'],
-                                        _links_arr[i]['target'])
+          _links << ::SEOTool::ReportLink.new(_links_arr[i]['href'],
+                                              _links_arr[i]['content'],
+                                              _links_arr[i]['rel'],
+                                              _links_arr[i]['target'])
         end
       end
 
