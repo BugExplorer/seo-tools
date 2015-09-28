@@ -15,9 +15,21 @@ require "./lib/application/classes/report_link"
 require "./lib/storage/storage_provider"
 require "./lib/storage/files_provider"
 require "./lib/storage/data_base_provider"
+require "./lib/application/models/link"
+require "./lib/application/models/report"
+require "./lib/application/models/header"
 require "./lib/storage/orm_provider"
 
+DataMapper.finalize.auto_migrate!
+
 module SEOTool
+  if User.count == 0
+    @user = User.create(username: "admin",
+                        email: "sebastiyan.michael@outlook.com",
+                        password: "administrator")
+    @user.save
+  end
+
   # Load configuration
   #
   def self.config

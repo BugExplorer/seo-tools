@@ -1,40 +1,4 @@
 module Storage
-  class Report
-    include DataMapper::Resource
-
-    property :id,          Serial
-    property :url,         Text
-    property :ip,          String
-    property :time,        Integer
-    property :links_count, Integer
-
-    has n, :headers
-    has n, :links
-  end
-
-  class Link
-    include DataMapper::Resource
-
-    property :id,      Serial
-    property :href,    Text
-    property :content, Text
-    property :rel,     Text
-    property :target,  Text
-
-    belongs_to :report
-  end
-
-  class Header
-    include DataMapper::Resource
-
-    property :id,   Serial
-    property :name, Text
-    property :text, Text
-    belongs_to :report
-  end
-
-  DataMapper.finalize.auto_upgrade!
-
   class ORMProvider < StorageProvider
     def get_all_reports
       _reports = []

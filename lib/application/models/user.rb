@@ -10,14 +10,5 @@ module SEOTool
     property :password, String, :length => 6..255
   end
 
-  DataMapper.finalize
 
-  if User.count == 0
-    @user = User.create(username: "admin",
-                        email: "example@example.com",
-                        password: "administrator")
-    @user.save
-  end
-
-  DataMapper.auto_upgrade!
 end
